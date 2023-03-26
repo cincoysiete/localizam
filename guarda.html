@@ -1,0 +1,377 @@
+<html lang="es">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="cincoysiete.css" />
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="img/milogo.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!-- ELIMINAR LA CACHE -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+
+<title>Localiza</title>
+<style>
+  .imagen-para-archivo input {
+    display:none;
+  }
+ </style>
+
+<script type="text/javascript" src="js/javascrises.js"></script>
+<script>
+
+// Confirmar la eliminacion de un registro
+function confirmar()
+{
+lineo=window.location.href;
+linei=lineo.split("=");
+elaza=localStorage.getItem(linei[1]+'localiza').split(',');
+	if(confirm('\nATENCIÓN. Vas a eliminar la ubicación: '+elaza[0]+'. \n¿Deseas continuar? '))
+		return true;
+	else
+		return false;
+}
+
+// Genera el registro con la ubicacion y demas informacion
+function recibir() {
+  var nombrem=document.getElementById("nombrem").value;
+  var fecham=document.getElementById("fecham").value;
+  var horam=document.getElementById("horam").value;
+  var altitudm=document.getElementById("altitudm").value;
+  var latitudm=document.getElementById("latitudm").value;
+  var longitudm=document.getElementById("longitudm").value;
+  var aproxm=document.getElementById("aproxm").value;
+  var velocim=document.getElementById("velocim").value;
+  var notasmn=document.getElementById("notasm").value;
+  var notasm=notasmn.replaceAll("\n","·#@");
+  var grupom=document.getElementById("grupom").value;
+  var localidadm=readCookie('localidad');
+  var temperaturam=readCookie('temperatura');
+  var presionm=readCookie('presion');
+  var humedadm=readCookie('humedad');
+if (nombrem.length<1){nombrem="         ";}
+if (fecham.length<1){fecham="";}
+if (horam.length<1){horam="";}
+if (altitudm.length<1){altitudm=" ";}
+if (latitudm.length<1){latitudm="";}
+if (longitudm.length<1){longitudm="";}
+if (aproxm.length<1){aproxm="";}
+if (velocim.length<1){velocim="";}
+if (notasm.length<1){notasm="";}
+if (grupom.length<1){grupom="";}
+if (localidadm.length<1){localidadm="";}
+if (temperaturam.length<1){temperaturam="";}
+if (presionm.length<1){temperaturam="";}
+if (humedadm.length<1){humedadm="";}
+
+document.cookie="posiactual="+nombrem+","+fecham+","+horam+","+altitudm+","+latitudm+","+longitudm+","+aproxm+","+velocim+","+notasm+","+grupom+","+localidadm+","+temperaturam+","+presionm+","+humedadm+","+""+","+""+","+""+","+"";
+
+
+// Mira si la URL lleva un numero de registro para editar
+lineo=window.location.href;
+linei=lineo.split("=");
+// Guardamos en Local Storage. Si estamos editando el registro
+if (linei[1]){
+localStorage.setItem(linei[1]+"localiza", readCookie('posiactual'));
+} else {
+// Guardamos en Local Storage. Si se trata de un nuevo registro
+contadordatos = localStorage.getItem("contadordatos");
+contadordatos++;
+localStorage.setItem("contadordatos", contadordatos);
+localStorage.setItem(contadordatos+"localiza", readCookie('posiactual'));
+}
+
+// Guarda en la cookie contadordatos el contador de registros
+document.cookie="contadordatos="+localStorage.getItem("contadordatos");
+
+if (linei[1]){
+  location.href="tabla.html";
+} else {
+location.href="index.html";
+}
+}
+
+function alante(){
+  recibir();
+  if (readCookie("ficha")<localStorage.getItem("contadordatos")){
+  fichi=readCookie("ficha");
+  fichi++;
+  document.cookie="ficha="+fichi;
+  location.href="guarda.html?we="+fichi;
+  }
+}
+
+function atras(){
+  recibir();
+  if (readCookie("ficha")>1){
+  fichi=readCookie("ficha");
+  fichi--;
+  document.cookie="ficha="+fichi;
+  location.href="guarda.html?we="+fichi;
+}
+}
+
+function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function palabrilla(){
+  // GENERA PALABRA ALEATORIA PARA NOMBRAR LA UBICACION
+// Crea una nueva instancia de XMLHttpRequest
+const xhr = new XMLHttpRequest();
+// Define la función que se ejecutará cuando se cargue el archivo
+xhr.onload = function() {
+  // Obtiene el contenido del archivo y lo separa por líneas
+  const contenido = xhr.responseText;
+  const lineas = contenido.split('\n');
+  // Escoge una línea al azar
+  const lineaAleatoria = lineas[Math.floor(Math.random() * lineas.length)];
+   palabrita=capitalizeFirstLetter(lineaAleatoria)
+  document.cookie="palabra="+palabrita;
+};
+
+// Abre el archivo
+xhr.open('GET', 'spanish.txt');
+
+// Envía la solicitud
+xhr.send();
+
+}
+
+palabrilla();
+palabrilla();
+lineo=window.location.href;
+linei=lineo.split("=");
+
+</script>
+  <!-- ENCABEZADO -->
+  <table width='100%' border='0' >
+  <tr><td align='left' width="10%">
+    <script>
+    if (linei[1]>0){
+      document.write('<a href="tabla.html" ><img src="img/salida.png" width="40px"></a>')
+  } else {
+    document.write('<a href="index.html" ><img src="img/salida.png" width="40px"></a>')
+  }
+
+</script>
+  
+
+</td><td align='center'>
+  </td><td align='center' width="10%">
+    <script>if (linei[1]>0){document.writeln('<center><a href="elimina.html?qw='+readCookie('registroactual')+'" style="color:#F35454;" class="button4" onclick="return confirmar();"><img src="img/eliminar.png" width="40px"></a></center>');}</script>
+  </td><td align='center' width="10%">
+<script>if (linei[1]>0){document.write('<button class="button4" onclick="atras()"><img src="img/flecha-izquierda.png" width="40px"></button>')}</script>
+    
+  </td><td align='center' width="10%">
+    <script>
+    if (linei[1]>0){
+      document.write('<button class="button4" onclick="alante()"><img src="img/flecha-derecha.png" width="40px"></button>');
+    }
+      document.write('</td><td align="center" width="10%">');
+  document.writeln('<div class="imagen-para-archivo">');
+      document.writeln('<label for="boton-archivo">');
+        document.writeln('<img src="img/boton-guardar.png" width="40px" title="Guardar ubicación actual"/>');
+        document.writeln('</label>');
+        document.writeln('<input id="boton-archivo"  onclick="recibir()" />');
+        document.writeln('</div>');          
+      </script>
+
+  </td></td></table>
+  <br>
+
+
+
+
+<form id="form_js">
+<script>
+
+lineo=window.location.href;
+linei=lineo.split("=");
+document.cookie="ficha="+linei[1];
+if (linei[1]){
+// Separa por comas la ubicacion a editar
+linea=localStorage.getItem(linei[1]+"localiza").split(",");
+document.cookie="registroactual="+linei[1];
+} else {
+// Separa por comas la ubicacion actual
+linea=readCookie('posiactual').split(",");
+}
+
+// Muestra el formulario con el registro actual y te ofrece la posibilidad de modificarlo
+document.writeln('<table width="100%" border="0">');
+
+  // NOMBRE
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Nombre ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+  if (linea[0]!="ubicacion"){
+document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+linea[0]+'">');
+  } else {
+    document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+readCookie('palabra')+'">');
+  }
+document.writeln('</td></tr>');
+
+// DIRECCION
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Direccion ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linei[1]>0){
+document.writeln('<input class="input-field" type="text"  placeholder="" id="localidadm" value="'+linea[10]+'">');
+} else {
+document.writeln('<input class="input-field" type="text"  placeholder="" id="localidadm" value="'+readCookie('localidad')+'">');
+}
+document.writeln('</td></tr>');
+
+// GRUPO
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Grupo ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+document.writeln('<input class="input-field" type="text"  placeholder="" id="grupom" value="'+linea[9]+'">');
+document.writeln('</td></tr>');
+
+// FECHA
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Fecha ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (movilise==0){
+qfe=linea[1].split("-");
+qan=qfe[0];
+qfe[1]++;
+qfe[1]="00"+qfe[1];
+qme=qfe[1].substring(qfe[1].length-2);
+qdi=qfe[2].substring(qfe[2].length-2);
+linea[1]=qan+"-"+qme+"-"+qdi;
+}
+
+if (movilise==1){
+qfe=linea[1].split("-");
+qan=qfe[0];
+qfe[1]++;
+qfe[1]="00"+qfe[1];
+qfe[2]="00"+qfe[2];
+qme=qfe[1].substring(qfe[1].length-2);
+qdi=qfe[2].substring(qfe[2].length-2);
+linea[1]=qan+"-"+qme+"-"+qdi;
+}
+document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'">');
+document.writeln('</td></tr>');
+
+// HORA
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Hora ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+qho=linea[2].split(":");
+qho[0]="00"+qho[0];
+qho[1]="00"+qho[1];
+qho1=qho[0].substring(qho[0].length-2);
+qho2=qho[1].substring(qho[1].length-2);
+linea[2]=qho1+":"+qho2;
+document.writeln('<input class="input-field" type="datetime"  placeholder="" id="horam" value= "'+linea[2]+'">');
+document.writeln('</td></tr>');
+
+// ALTITUD
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Altitud ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linea[3]="null"){linea[3]="";}
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="altitudm" value= "'+linea[3]+'">');
+document.writeln('</td></tr>');
+
+// LATITUD
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Latitud ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="latitudm" value="'+linea[4]+'">');
+document.writeln('</td></tr>');
+
+// LONGITUD
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Longitud ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="longitudm" value="'+linea[5]+'">');
+document.writeln('</td></tr>');
+document.writeln('</td></tr>');
+
+// APROXIMACION
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Aproximación ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="aproxm" value="'+linea[6]+'">');
+document.writeln('</td></tr>');
+
+// VELOCIDAD
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Velocidad ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linea[7]=="null"){linea[7]="";}
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="velocim" value="'+linea[7]+'">');
+document.writeln('</td></tr>');
+
+// TEMPERATURA
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Temperatura ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linea[11]=="null"){linea[11]="";}
+if (linei[1]>0){
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="temperaturam" value="'+linea[11]+'">');
+} else {
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="temperaturam" value="'+readCookie('temperatura')+'">');
+}
+document.writeln('</td></tr>');
+
+// PRESION
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Presión ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linea[12]=="null"){linea[12]="";}
+if (linei[1]>0){
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="presionm" value="'+linea[12]+'">');
+} else {
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="presionm" value="'+readCookie('presion')+'">');
+}
+document.writeln('</td></tr>');
+
+// HUMEDAD
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Humedad ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linea[13]=="null"){linea[13]="";}
+if (linei[1]>0){
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="humedadm" value="'+linea[13]+'">');
+} else {
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="humedadm" value="'+readCookie('humedad')+'">');
+}
+document.writeln('</td></tr>');
+
+
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+
+// las notas se guardan sin intros y se le ponen al mostrar el formulario
+document.writeln('Notas ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+var notasmm=linea[8].replaceAll("·#@","\n");
+document.writeln('<textarea class="input-field" rows="15" id="notasm" name="notasm" >'+notasmm+'</textarea>');
+document.writeln('</td></tr>');
+
+document.writeln('</table>');
+
+</script>
+
+
+</form>
+<script>
+// MUESTRA MAPA
+if(navigator.onLine) {
+document.writeln('<br>') ;
+document.writeln('<iframe class="iframe" src="https://maps.google.com/?q='+linea[4]+','+linea[5]+'&z=18&t=k&output=embed" height="590" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>'); 
+} else {
+
+}
+
+document.writeln('<br><br>');
+
+</script>
+<div id="escribir"></div>
+<span class="colo" id="address"></span>

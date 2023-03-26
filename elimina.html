@@ -1,0 +1,39 @@
+<html lang="es">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="cincoysiete.css" />
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="img/milogo.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Localiza</title>
+
+<script type="text/javascript" src="js/javascrises.js"></script>
+<script>
+
+// Extrae de la URL el numero de registro a eliminar
+lineo=window.location.href;
+linei=lineo.split("=");
+
+// Elimina el registro
+document.cookie='eliminar='+localStorage.getItem(linei[1]+"localiza");
+localStorage.removeItem(linei[1]+"localiza");
+
+// Limpia lineas en blanco en los regristros
+let f=1;
+for (i=1;i<=localStorage.getItem("contadordatos");i++) {
+    linea=localStorage.getItem(i+"localiza");
+    if (linea){
+        localStorage.setItem(f+"localiza", linea);
+        f++;
+    }
+}
+localStorage.setItem(i+"localiza", linea);
+
+contadordatos = localStorage.getItem("contadordatos");
+contadordatos=f-1;
+localStorage.setItem("contadordatos", contadordatos);
+
+
+document.cookie="contadordatos="+localStorage.getItem("contadordatos");
+location.href="tabla.html";
+
+</script>

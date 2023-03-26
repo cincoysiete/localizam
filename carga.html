@@ -1,0 +1,49 @@
+
+<input id="cargar1" type="image" src="img/subir.png" width="40px"value="" />
+<textarea id="contenido" cols="30" rows="10" hidden></textarea>
+<script>
+var texto="";
+// ejemplo de como cargar un archivo de texto en un textarea
+document.querySelector("#cargar1").addEventListener("click", async ()=>{ 
+  try {
+    // NOTA showOpenFilePicker nos devuelve un array!
+    const referencias = await window.showOpenFilePicker({}); 
+
+    // a partir de la referencia, obtenemos el archivo (casilla 0 del array)
+    const archivo = await referencias[0].getFile();
+
+    // a partir del archivo obtenemos su contenido
+    var contenido = await archivo.text();				
+
+    // mostramos contenido en el textarea 
+    document.querySelector("#contenido").value = contenido;
+  } catch(err) {
+    console.log("Se ha producido un error o se ha cancelado la carga. " + err);
+  }
+  texto	=contenido;
+
+  var kaka=texto.split("\n");
+  var conta=1;
+  kaka.forEach(function() {conta++;}
+
+);
+
+localStorage.clear();
+
+contador=0;
+  for (i=1;i<=conta;i++) {
+    if (kaka[i]){
+    localStorage.setItem(i+"localiza", kaka[i]);
+    document.writeln(localStorage.getItem(i+'localiza'));
+    document.writeln("<br>");
+    contador++;
+}
+}
+document.cookie="contadordatos="+contador;
+localStorage.setItem("contadordatos", contador);
+
+});
+
+</script>
+
+

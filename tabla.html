@@ -1,0 +1,155 @@
+<html lang="es">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="cincoysiete.css" />
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="img/milogo.png" />
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!-- ELIMINAR LA CACHE -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<title>Localiza</title>
+
+<!-- ASPECTO DEL INPUT FILE -->
+<style>
+.imagen-para-archivo input {
+  display:none;
+}
+</style>
+
+<script type="text/javascript" src="js/javascrises.js"></script>
+    
+    <!-- ENCABEZADO -->
+    <table width='100%' border='0' >
+    <tr><td align='left' width="10%">
+    <a href="index.html"><img src="img/salida.png" width="40px"></a>
+    </td><td align='center'>
+    </td><td align='center' width="10%">
+
+<script>
+// if (readCookie('filtro')!="" && readCookie('filtro')!="null"){document.write('<a href="nofiltra.html"><img src="img/filtrar.png" width="35px"></a>');}
+if (readCookie('filtro')==="null"){document.cookie="filtro="+"";}
+document.write(readCookie('filtro'));
+if (readCookie('filtro')==""){} else {document.write('<a href="nofiltra.html"><img src="img/filtrar.png" width="35px"></a>');}
+// document.write('<a href="nofiltra.html"><img src="img/filtrar.png" width="35px"></a>');
+</script>
+</td><td align='center' width="10%">
+      <div class="imagen-para-archivo">
+          <label for="boton-archivo">
+            <img src="img/nubesube.png" width="40px" title="Cargar tabla de ubicaciones"/>
+          </label>
+          <input id="boton-archivo" type="file" onchange="readFile(this)" />
+        </div>                
+      </td><td align='center' width="10%">
+        <a href="descarga.html" title="Descargar tabla de ubicaciones"><img src="img/nubebaja.png" width="40px"></a>
+    </td></td></table>
+    <br>
+
+    
+<script>
+contadordatos = localStorage.getItem("contadordatos");
+
+// MIRA SU ESTAS EN UN MOVIL
+if (/Mobi/.test(navigator.userAgent)) {
+          movilise=1;
+        } else {
+          movilise=0;
+        }
+        if (movilise==1){document.writeln('<font size="2px">');} else {document.writeln('<font size="3px">');}
+
+// PONE EL ENCABEZADO DE LA TABLA
+if (movilise==0) {lineu='ID,<a style="color:#FFFFFF;" href="ordena.html?wer=0">LUGAR</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=1">FECHA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=2">HORA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=3">ALTITUD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=4">LATITUD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=5">LONGITUD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=6">APROXIMACIÓN</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=7">VELOCIDAD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=9">GRUPO</a>';} else {lineu='ID,<a style="color:#FFFFFF;" href="ordena.html?wer=0">LUGAR</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=1">FECHA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=2">HORA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=9">GRUPO</a>';}
+
+document.writeln('<table class="tabla" width=100% align="center" border="0">');
+document.writeln("<tr><th style='color:#FFFFFF;'>");
+document.writeln(lineu.replaceAll(",","<th style='color:#FFFFFF;'>"));
+document.writeln('</th></tr>');
+
+// MUESTRA LOS REGISTROS EN LA TABLA
+if (contadordatos>0){
+for (i=1;i<=contadordatos;i++) {
+linea=" ,"+i+","+localStorage.getItem(i+'localiza');
+
+// MOSTRAMOS TABLA EN UN MOVIL
+if (movilise==1) {
+linea=linea.split(",");
+enlaza=linea[1];
+filtra=linea[11];
+linea[2]='<a href="guarda.html?we='+enlaza+'">'+linea[2]+'</a>';
+filtramos=linea[11];
+linea[11]='<a href="filtra.html?we='+filtra+'">'+linea[11]+'</a>';
+linea=linea.slice(0,5)+","+linea.slice(11,12);
+linea=linea.toString();
+} else {
+
+// MOSTRAMOS TABLA EN UN PC
+linea=linea.split(",");
+enlaza=linea[1];
+filtra=linea[11];
+linea[2]='<a href="guarda.html?we='+enlaza+'">'+linea[2]+'</a>';
+filtramos=linea[11];
+linea[11]='<a href="filtra.html?we='+filtra+'">'+linea[11]+'</a>';
+linea=linea.slice(0,10)+","+linea.slice(11,12);
+linea=linea.toString();
+}
+
+kaka=linea.split(",");
+lineo=linea;
+
+// FILTRAMOS LOS REGISTROS LISTADOS
+if (readCookie('filtro')==filtramos){
+document.writeln('<tr>');
+document.writeln(lineo.replaceAll(",","<td align='left' style='height: 30px;background-color: #FFFFFF; border:0px solid #E5E5E5'>"));
+document.writeln('</td></tr>');
+}
+
+// NO FILTRAMOS LOS REGISTROS LISTADOS
+if (readCookie('filtro')=="")
+{
+document.writeln('<tr>');
+document.writeln(lineo.replaceAll(",","<td align='left' style='height: 30px;background-color: #FFFFFF; border:1px dotted #E5E5E5;'>"));
+document.writeln('</td></tr>');
+}
+}
+document.writeln('</table>');
+}
+document.writeln('<br><br>');
+
+
+// SUBE ARCHIVO CON GRUPO DE REGISTROS
+function readFile(input) {
+  let file = input.files[0];
+  let reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = function() {
+  texto	=reader.result;
+  var kaka=texto.split("\n");
+  var conta=1;
+  kaka.forEach(function() {conta++;}
+);
+
+conta--;
+localStorage.clear();
+contador=0;
+  for (i=1;i<=conta;i++) {
+    if (kaka[i]){
+    localStorage.setItem(i+"localiza", kaka[i]);
+    contador++;
+}
+}
+
+document.cookie="contadordatos="+contador;
+localStorage.setItem("contadordatos", contador);
+
+location.href="tabla.html";
+};
+
+  reader.onerror = function() {
+    console.log(reader.error);
+  };
+
+}
+</script>

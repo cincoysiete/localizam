@@ -1,0 +1,61 @@
+<script type="text/javascript" src="js/javascrises.js"></script>
+
+<script>
+// Determina en que columna hemos tocado para ordenar
+lineo=window.location.href;
+linei=lineo.split("=");
+linete=linei[1];
+
+if (linete>0){
+localStorage.setItem("0localiza", ", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,");
+for (i=0;i<=localStorage.getItem("contadordatos");i++) {
+areglo=localStorage.getItem(i+'localiza');
+miArray=areglo.split(",");
+let temp = miArray[0];
+miArray[0] = miArray[linete];
+miArray[linete] = temp;
+
+localStorage.setItem(i+"localiza", miArray);
+
+}
+}
+
+// Pasa los registros de LocalStorage a una cadena
+datos="";
+for (i=0;i<=localStorage.getItem("contadordatos");i++) {
+datos=datos+localStorage.getItem(i+'localiza')+"\n";
+}
+
+// Determina en que columna hemos tocado para ordenar
+lineo=window.location.href;
+linei=lineo.split("=");
+linete=linei[1];
+
+// Ordena los registros
+let matrizDatos = datos.split('\n').map(fila => fila.split(','));
+matrizDatos.sort((fila1, fila2) => fila1[0].localeCompare(fila2[0]));
+let datosOrdenados = matrizDatos.map(fila => fila.join(',')).join('\n');
+
+// Separa en lineas los datos ya ordenados
+linea=datosOrdenados.split('\n');
+
+// Coloca los registros ordenados en LocalStorage
+for (i=1;i<=localStorage.getItem("contadordatos");i++) {
+localStorage.setItem(i+"localiza", linea[i+1]);
+}
+
+if (linete>0){
+for (i=0;i<=localStorage.getItem("contadordatos");i++) {
+areglo=localStorage.getItem(i+'localiza');
+miArray1=areglo.split(",");
+let temp = miArray1[0];
+miArray1[0] = miArray1[linete];
+miArray1[linete] = temp;
+
+localStorage.setItem(i+"localiza", miArray1);
+}
+}
+location.href="tabla.html";
+
+</script>
+
