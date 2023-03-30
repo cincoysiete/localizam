@@ -6,15 +6,12 @@
 <link rel="icon" type="image/png" href="img/milogo.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-
-
 <!-- ELIMINAR LA CACHE -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 
 <title>Localiza</title>
-
 </head>
 <body>
 <main>
@@ -23,37 +20,6 @@
 
 
 <script>
-// DEVUELVE LA DIRECCION CORRESPONDIENTE A LAS COORDENADAS
-function simpleReverseGeocoding(lon, lat) {
-  fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + lon + '&lat=' + lat)
-  .then(response => response.json())
-  .then(main => {
-    let temp = main.display_name;
-    document.cookie = "localidad=" + temp;
-})
-  .catch(error => console.error(error));
-}
-
-// MOSTRAR CLIMA
-function leeclima(){
-const apiKey = 'bfd244f84adaf800648aaa640a0ddf68';
-  const lat=readCookie('latitud');
-  const lon=readCookie('longitud');
- 
-fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&units=metric'+'&appid='+apiKey)
-  .then(response => response.json())
-  .then(current => {
-    let temp = current.main.temp;
-    let presion = current.main.pressure;
-    let humedad = current.main.humidity;
-    let uva = current.main.clouds;
-    document.cookie = "temperatura=" + temp;
-    document.cookie = "humedad=" + humedad;
-    document.cookie = "presion=" + presion;
-})
-  .catch(error => console.error(error));
-}
-
 function confirmar()
 {
 	if(confirm('\nATENCIÓN. Vas a eliminar todas las ubicaciones: \n¿Deseas continuar? '))
@@ -62,21 +28,7 @@ function confirmar()
 		return false;
 }
 
-function quitacookies(){
-  // Obtener todas las cookies
-var cookies = document.cookie.split(";");
-
-// Eliminar cada cookie
-for (var i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i];
-    var eqPos = cookie.indexOf("=");
-    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-}
-contadordatos = localStorage.getItem("contadordatos");
-document.cookie="contadordatos="+localStorage.getItem("contadordatos");
-
-}
+// }
 // SERVICE WORKER
 // if ("serviceWorker" in navigator) {
 //   window.addEventListener("load", function() {
@@ -87,19 +39,34 @@ document.cookie="contadordatos="+localStorage.getItem("contadordatos");
 //   });
 // }
 
+geoloc4();
+simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
+leeclima();
+palabrilla();
+
+console.log(readCookie('localidad').length);
+
+if (!readCookie('localidad')){
+geoloc4();
+simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
+leeclima();
+palabrilla();
+} 
+
+
+// EJECUTAMOS LOS SENSORES ANTES DE CARGAR LA PAGINA
+// document.addEventListener("DOMContentLoaded", function(event) { 
+// geoloc4();
+// simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
+// leeclima();
+// });
+
+
 // SI SE EJECUTA EN UN MOVIL
 if (movilise==1){} else {document.writeln('<div class="contenedor22">'+'<br>');}
 </script>
 
-<!-- <script language="javascript" type="text/javascript"> 
-geoloc4();
-simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
-leeclima();
-geoloc4();
-simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
-leeclima();
-</script> -->
-
+<body>
 <!-- ENCABEZADO -->
 <table width='100%' border='0' >
 <tr><td width="10%">
@@ -124,7 +91,7 @@ let now = new Date();
 mese=now.getMonth()+1;
 document.writeln('<font size="2px">');
 document.writeln(' ');
-document.writeln('<img src="img/calendario.png" width="20px" title="Fecha actual"> ') ;
+document.writeln('<img src="img/calendario.png" width="20px" title="Fecha actual "> ') ;
 document.write(now.getFullYear()+'-');
 document.write(mese+'-');
 document.write(now.getDate());
@@ -139,33 +106,43 @@ document.write('<br>');
 
 // MUESTRA COORDENADAS
 document.writeln(' ');
-document.writeln('<img src="img/ubicacion.png" width="20px" title="Latitud y longitud"> '+ parseFloat(readCookie('latitud')).toFixed(2)+' , '+ parseFloat(readCookie('longitud')).toFixed(2));
+document.writeln('<img src="img/ubicacion.png" width="20px" title="Latitud y longitud "> '+ parseFloat(readCookie('latitud')).toFixed(2)+' , '+ parseFloat(readCookie('longitud')).toFixed(2));
 document.write('<br>');
 
-
+// APROXIMACION
 if (readCookie('aproxm')>0){
-  waprox=parseFloat(readCookie('aproxm')).toFixed(2);document.writeln(' ');document.writeln('<img src="img/semejanza.png" width="20px" title="Aproximación de la ubicación"> '+ waprox);
+  waprox=parseFloat(readCookie('aproxm')).toFixed(2);document.writeln(' ');document.writeln('<img src="img/semejanza.png" width="20px" title="Aproximación de la ubicación "> '+ waprox);
 document.write('<br>');
 }
 
+// ALTITUD
 if (readCookie('altitud')>0){
-  waltitud=parseFloat(readCookie('altitud')).toFixed(2)+ ' m';document.writeln(' ');document.writeln('<img src="img/montana.png" width="20px" title="Altitud"> '+ parseFloat(readCookie('altitud')).toFixed(2)+ ' m');
+  waltitud=parseFloat(readCookie('altitud')).toFixed(2)+ ' m';document.writeln(' ');document.writeln('<img src="img/montana.png" width="20px" title="Altitud "> '+ parseFloat(readCookie('altitud')).toFixed(2)+ ' m');
 document.write('<br>');
 }
 
+// VELOCIDAD
 if (readCookie('velocidad')>0){
-  wvelocidad=parseFloat(readCookie('velocidad')).toFixed(2);document.writeln(' ');document.writeln('<img src="img/velocidad.png" width="20px" title="Velocidad"> '+ wvelocidad);
+  wvelocidad=parseFloat(readCookie('velocidad')).toFixed(2);document.writeln(' ');document.writeln('<img src="img/velocidad.png" width="20px" title="Velocidad "> '+ wvelocidad);
 document.write('<br>');
 }
 
-  if (readCookie('temperatura')>0){document.writeln(' ');document.writeln('<img src="img/termometro.png" width="20px" title="Temperatura">'+readCookie('temperatura')+' ºC');document.writeln('<br>');}
-  if (readCookie('presion')>0){document.writeln(' ');document.writeln('<img src="img/manometro.png" width="20px" title="presion">'+readCookie('presion')+' hPa');document.writeln('<br>');}
-  if (readCookie('humedad')>0){document.writeln(' ');document.writeln('<img src="img/humedad.png" width="20px" title="humedad">'+readCookie('humedad')+' %');document.writeln('<br>');}
+// TEMPERATURA
+  if (readCookie('temperatura')>0){document.writeln(' ');document.writeln('<img src="img/termometro.png" width="20px" title="Temperatura ">'+readCookie('temperatura')+' ºC');document.writeln('<br>');}
+
+// PRESION ATMOSFERICA
+  if (readCookie('presion')>0){document.writeln(' ');document.writeln('<img src="img/manometro.png" width="20px" title="Presion atmosférica ">'+readCookie('presion')+' hPa');document.writeln('<br>');}
+
+// HUMEDAD
+  if (readCookie('humedad')>0){document.writeln(' ');document.writeln('<img src="img/humedad.png" width="20px" title="Humedad relativa del aire ">'+readCookie('humedad')+' %');document.writeln('<br>');}
+
+// VELOCIDAD EL VIENTO
+  if (readCookie('viento')>0){document.writeln(' ');document.writeln('<img src="img/anemometro.png" width="20px" title="Velocidad del viento ">'+readCookie('viento')+' m/s');document.writeln('<br>');}
 
 // MOSTRAR DIRECCION
 if (readCookie('localidad')!=""){
   document.writeln(' ');
-document.writeln('<img src="img/direccion-de-casa.png" width="20px" title="Dirección">');document.writeln(readCookie('localidad'));
+document.writeln('<img src="img/direccion-de-casa.png" width="20px" title="Dirección ">');document.writeln(readCookie('localidad'));
 document.writeln('<br>');
 }
 
@@ -187,20 +164,11 @@ document.writeln('<center><a href="" style="color:#F35454;" class="button1" oncl
 document.writeln('<br><br>');
 // ******************************************************************************************
 
-geoloc4();
-simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
-leeclima();
-geoloc4();
-simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
-leeclima();
-geoloc4();
-simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
-leeclima();
 
 </script>
 
-<!-- <div id="demo"></div> -->
-<!-- <span class="colo" id="address" id="temp"></span> -->
+<div id="demo"></div>
+<span class="colo" id="address" id="temp"></span>
 <!-- <span class="colo"></span> -->
 </body>
 </html>

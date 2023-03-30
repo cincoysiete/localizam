@@ -33,114 +33,10 @@ elaza=localStorage.getItem(linei[1]+'localiza').split(',');
 		return false;
 }
 
-// Genera el registro con la ubicacion y demas informacion
-function recibir() {
-  var nombrem=document.getElementById("nombrem").value;
-  var fecham=document.getElementById("fecham").value;
-  var horam=document.getElementById("horam").value;
-  var altitudm=document.getElementById("altitudm").value;
-  var latitudm=document.getElementById("latitudm").value;
-  var longitudm=document.getElementById("longitudm").value;
-  var aproxm=document.getElementById("aproxm").value;
-  var velocim=document.getElementById("velocim").value;
-  var notasmn=document.getElementById("notasm").value;
-  var notasm=notasmn.replaceAll("\n","·#@");
-  var grupom=document.getElementById("grupom").value;
-  var localidadm=readCookie('localidad');
-  var temperaturam=readCookie('temperatura');
-  var presionm=readCookie('presion');
-  var humedadm=readCookie('humedad');
-if (nombrem.length<1){nombrem="         ";}
-if (fecham.length<1){fecham="";}
-if (horam.length<1){horam="";}
-if (altitudm.length<1){altitudm=" ";}
-if (latitudm.length<1){latitudm="";}
-if (longitudm.length<1){longitudm="";}
-if (aproxm.length<1){aproxm="";}
-if (velocim.length<1){velocim="";}
-if (notasm.length<1){notasm="";}
-if (grupom.length<1){grupom="";}
-if (localidadm.length<1){localidadm="";}
-if (temperaturam.length<1){temperaturam="";}
-if (presionm.length<1){temperaturam="";}
-if (humedadm.length<1){humedadm="";}
+// document.addEventListener("DOMContentLoaded", function(event) { 
+// palabrilla();
+// });
 
-document.cookie="posiactual="+nombrem+","+fecham+","+horam+","+altitudm+","+latitudm+","+longitudm+","+aproxm+","+velocim+","+notasm+","+grupom+","+localidadm+","+temperaturam+","+presionm+","+humedadm+","+""+","+""+","+""+","+"";
-
-
-// Mira si la URL lleva un numero de registro para editar
-lineo=window.location.href;
-linei=lineo.split("=");
-// Guardamos en Local Storage. Si estamos editando el registro
-if (linei[1]){
-localStorage.setItem(linei[1]+"localiza", readCookie('posiactual'));
-} else {
-// Guardamos en Local Storage. Si se trata de un nuevo registro
-contadordatos = localStorage.getItem("contadordatos");
-contadordatos++;
-localStorage.setItem("contadordatos", contadordatos);
-localStorage.setItem(contadordatos+"localiza", readCookie('posiactual'));
-}
-
-// Guarda en la cookie contadordatos el contador de registros
-document.cookie="contadordatos="+localStorage.getItem("contadordatos");
-
-if (linei[1]){
-  location.href="tabla.html";
-} else {
-location.href="index.html";
-}
-}
-
-function alante(){
-  recibir();
-  if (readCookie("ficha")<localStorage.getItem("contadordatos")){
-  fichi=readCookie("ficha");
-  fichi++;
-  document.cookie="ficha="+fichi;
-  location.href="guarda.html?we="+fichi;
-  }
-}
-
-function atras(){
-  recibir();
-  if (readCookie("ficha")>1){
-  fichi=readCookie("ficha");
-  fichi--;
-  document.cookie="ficha="+fichi;
-  location.href="guarda.html?we="+fichi;
-}
-}
-
-function capitalizeFirstLetter(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
-}
-
-function palabrilla(){
-  // GENERA PALABRA ALEATORIA PARA NOMBRAR LA UBICACION
-// Crea una nueva instancia de XMLHttpRequest
-const xhr = new XMLHttpRequest();
-// Define la función que se ejecutará cuando se cargue el archivo
-xhr.onload = function() {
-  // Obtiene el contenido del archivo y lo separa por líneas
-  const contenido = xhr.responseText;
-  const lineas = contenido.split('\n');
-  // Escoge una línea al azar
-  const lineaAleatoria = lineas[Math.floor(Math.random() * lineas.length)];
-   palabrita=capitalizeFirstLetter(lineaAleatoria)
-  document.cookie="palabra="+palabrita;
-};
-
-// Abre el archivo
-xhr.open('GET', 'spanish.txt');
-
-// Envía la solicitud
-xhr.send();
-
-}
-
-palabrilla();
-palabrilla();
 lineo=window.location.href;
 linei=lineo.split("=");
 
@@ -209,6 +105,7 @@ document.writeln('</td><td style="background-color: #FFFFFF;">');
   if (linea[0]!="ubicacion"){
 document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+linea[0]+'">');
   } else {
+    // palabrilla();
     document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+readCookie('palabra')+'">');
   }
 document.writeln('</td></tr>');
@@ -271,26 +168,27 @@ linea[2]=qho1+":"+qho2;
 document.writeln('<input class="input-field" type="datetime"  placeholder="" id="horam" value= "'+linea[2]+'">');
 document.writeln('</td></tr>');
 
+
 // ALTITUD
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
 document.writeln('Altitud ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (linea[3]="null"){linea[3]="";}
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="altitudm" value= "'+linea[3]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="altitudm" value= "'+linea[3]+'" disabled>');
 document.writeln('</td></tr>');
 
 // LATITUD
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
 document.writeln('Latitud ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="latitudm" value="'+linea[4]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="latitudm" value="'+linea[4]+'" disabled>');
 document.writeln('</td></tr>');
 
 // LONGITUD
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
 document.writeln('Longitud ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="longitudm" value="'+linea[5]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="longitudm" value="'+linea[5]+'" disabled>');
 document.writeln('</td></tr>');
 document.writeln('</td></tr>');
 
@@ -298,7 +196,7 @@ document.writeln('</td></tr>');
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
 document.writeln('Aproximación ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="aproxm" value="'+linea[6]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="aproxm" value="'+linea[6]+'" disabled>');
 document.writeln('</td></tr>');
 
 // VELOCIDAD
@@ -306,7 +204,7 @@ document.writeln('<tr><td align="right" style="background-color: #000000; color:
 document.writeln('Velocidad ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (linea[7]=="null"){linea[7]="";}
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="velocim" value="'+linea[7]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="velocim" value="'+linea[7]+'" disabled>');
 document.writeln('</td></tr>');
 
 // TEMPERATURA
@@ -315,9 +213,9 @@ document.writeln('Temperatura ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (linea[11]=="null"){linea[11]="";}
 if (linei[1]>0){
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="temperaturam" value="'+linea[11]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="temperaturam" value="'+linea[11]+'" disabled>');
 } else {
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="temperaturam" value="'+readCookie('temperatura')+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="temperaturam" value="'+readCookie('temperatura')+'" disabled>');
 }
 document.writeln('</td></tr>');
 
@@ -327,9 +225,9 @@ document.writeln('Presión ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (linea[12]=="null"){linea[12]="";}
 if (linei[1]>0){
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="presionm" value="'+linea[12]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="presionm" value="'+linea[12]+'" disabled>');
 } else {
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="presionm" value="'+readCookie('presion')+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="presionm" value="'+readCookie('presion')+'" disabled>');
 }
 document.writeln('</td></tr>');
 
@@ -339,10 +237,22 @@ document.writeln('Humedad ');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (linea[13]=="null"){linea[13]="";}
 if (linei[1]>0){
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="humedadm" value="'+linea[13]+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="humedadm" value="'+linea[13]+'" disabled>');
 } else {
-document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="humedadm" value="'+readCookie('humedad')+'">');
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="humedadm" value="'+readCookie('humedad')+'" disabled>');
 }
+
+// VIENTO
+document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
+document.writeln('Viento ');
+document.writeln('</td><td style="background-color: #FFFFFF;">');
+if (linea[14]=="null"){linea[14]="";}
+if (linei[1]>0){
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="vientom" value="'+linea[13]+'" disabled>');
+} else {
+document.writeln('<input class="input-field" step="0.01" type="number"  placeholder="" id="vientom" value="'+readCookie('viento')+'" disabled>');
+}
+
 document.writeln('</td></tr>');
 
 
