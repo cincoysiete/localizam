@@ -44,16 +44,15 @@ simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
 leeclima();
 palabrilla();
 
-console.log(readCookie('localidad').length);
-
-if (!readCookie('localidad')){
+for (i=1;i<=5;i++) {
+// document.write("**"+readCookie('humedad')+"**");
+if (readCookie('humedad')<1){
 geoloc4();
 simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
 leeclima();
 palabrilla();
 } 
-
-
+}
 // EJECUTAMOS LOS SENSORES ANTES DE CARGAR LA PAGINA
 // document.addEventListener("DOMContentLoaded", function(event) { 
 // geoloc4();

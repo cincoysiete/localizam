@@ -1,11 +1,10 @@
 {
-"short_name": "LocalizaG",
-"name": "LocalizaG",
-"description": "LocalizaG",
+"short_name": "localizaM",
+"name": "localizaM",
+"description": "LocalizaM",
 "icons": [{"src": "img/milogo.png","type": "image/png","sizes": "192x192"},{"src": "img/milogo.png","type": "image/png","sizes": "512x512"}],
-"start_url": "https://cartaconqr.com/localizagit/index.html",
+"start_url": "https://cartaconqr.com/localizam/index.html",
 "background_color": "#FFFFFF",
 "display": "standalone",
-"scope": "/localizagit",
 "theme_color": "#FFFFFF"
 }

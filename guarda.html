@@ -152,7 +152,7 @@ qme=qfe[1].substring(qfe[1].length-2);
 qdi=qfe[2].substring(qfe[2].length-2);
 linea[1]=qan+"-"+qme+"-"+qdi;
 }
-document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'">');
+document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'" disabled>');
 document.writeln('</td></tr>');
 
 // HORA
@@ -165,7 +165,7 @@ qho[1]="00"+qho[1];
 qho1=qho[0].substring(qho[0].length-2);
 qho2=qho[1].substring(qho[1].length-2);
 linea[2]=qho1+":"+qho2;
-document.writeln('<input class="input-field" type="datetime"  placeholder="" id="horam" value= "'+linea[2]+'">');
+document.writeln('<input class="input-field" type="datetime"  placeholder="" id="horam" value= "'+linea[2]+'" disabled>');
 document.writeln('</td></tr>');
 
 
