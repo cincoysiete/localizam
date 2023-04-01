@@ -45,8 +45,8 @@ leeclima();
 palabrilla();
 
 for (i=1;i<=5;i++) {
-// document.write("**"+readCookie('humedad')+"**");
-if (readCookie('humedad')<1){
+document.write("**"+readCookie('humedad')+"**");
+if (readCookie('humedad')<1 || readCookie('humedad')==="null"){
 geoloc4();
 simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
 leeclima();
