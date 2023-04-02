@@ -6,7 +6,7 @@ lineo=window.location.href;
 linei=lineo.split("=");
 linete=linei[1];
 
-if (linete>0){
+if (linete>=0){
 localStorage.setItem("0localiza", ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 for (i=0;i<=localStorage.getItem("contadordatos");i++) {
 areglo=localStorage.getItem(i+'localiza');
@@ -16,6 +16,8 @@ miArray[0] = miArray[linete];
 miArray[linete] = temp;
 
 localStorage.setItem(i+"localiza", miArray);
+
+// console.log(localStorage.getItem(i+"localiza"));
 
 }
 }
@@ -44,7 +46,7 @@ for (i=1;i<=localStorage.getItem("contadordatos");i++) {
 localStorage.setItem(i+"localiza", linea[i+1]);
 }
 
-if (linete>0){
+if (linete>=0){
 for (i=0;i<=localStorage.getItem("contadordatos");i++) {
 areglo=localStorage.getItem(i+'localiza');
 miArray1=areglo.split(",");

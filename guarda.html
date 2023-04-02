@@ -58,13 +58,18 @@ linei=lineo.split("=");
   </td><td align='center' width="10%">
     <script>if (linei[1]>0){document.writeln('<center><a href="elimina.html?qw='+readCookie('registroactual')+'" style="color:#F35454;" class="button4" onclick="return confirmar();"><img src="img/eliminar.png" width="40px"></a></center>');}</script>
   </td><td align='center' width="10%">
-<script>if (linei[1]>0){document.write('<button class="button4" onclick="atras()"><img src="img/flecha-izquierda.png" width="40px"></button>')}</script>
+
+    <script>if (linei[1]>0){document.write('<button class="button4" onclick="atras()"><img src="img/flecha-izquierda.png" width="40px"></button>')}</script>
     
   </td><td align='center' width="10%">
+
+
+
     <script>
     if (linei[1]>0){
       document.write('<button class="button4" onclick="alante()"><img src="img/flecha-derecha.png" width="40px"></button>');
     }
+    
       document.write('</td><td align="center" width="10%">');
   document.writeln('<div class="imagen-para-archivo">');
       document.writeln('<label for="boton-archivo">');
@@ -86,7 +91,7 @@ linei=lineo.split("=");
 lineo=window.location.href;
 linei=lineo.split("=");
 document.cookie="ficha="+linei[1];
-if (linei[1]){
+if (linei[1]>0){
 // Separa por comas la ubicacion a editar
 linea=localStorage.getItem(linei[1]+"localiza").split(",");
 document.cookie="registroactual="+linei[1];
@@ -94,6 +99,13 @@ document.cookie="registroactual="+linei[1];
 // Separa por comas la ubicacion actual
 linea=readCookie('posiactual').split(",");
 }
+
+// document.cookie="nombrem="+linea[0];
+// document.cookie="localidadm="+linea[10];
+// document.cookie="grupom="+linea[9];
+// document.writeln(readCookie('nombrem')+'<br>');
+// document.writeln(readCookie('localidadm')+'<br>');
+// document.writeln(readCookie('grupom')+'<br>');
 
 // Muestra el formulario con el registro actual y te ofrece la posibilidad de modificarlo
 document.writeln('<table width="100%" border="0">');
@@ -109,6 +121,7 @@ document.writeln('<input class="input-field" type="text"  placeholder="" id="nom
     document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+readCookie('palabra')+'">');
   }
 document.writeln('</td></tr>');
+
 
 // DIRECCION
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
@@ -267,6 +280,8 @@ document.writeln('</td></tr>');
 
 document.writeln('</table>');
 
+// IR A LA UBICACION
+document.writeln('<center><a href="https://www.google.com/maps/dir/'+readCookie("localidad")+'/'+linea[10]+'" target="new"><img src="img/mapa.gif" width="70px"></a></center>');
 </script>
 
 

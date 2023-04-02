@@ -59,6 +59,7 @@ if (/Mobi/.test(navigator.userAgent)) {
         }
         if (movilise==1){document.writeln('<font size="2px">');} else {document.writeln('<font size="3px">');}
 
+
 // PONE EL ENCABEZADO DE LA TABLA
 if (movilise==0) {lineu='ID,<a style="color:#FFFFFF;" href="ordena.html?wer=0">LUGAR</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=1">FECHA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=2">HORA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=3">ALTITUD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=4">LATITUD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=5">LONGITUD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=6">APROXIMACIÓN</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=7">VELOCIDAD</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=9">GRUPO</a>';} else {lineu='ID,<a style="color:#FFFFFF;" href="ordena.html?wer=0">LUGAR</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=1">FECHA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=2">HORA</a>,<a style="color:#FFFFFF;" href="ordena.html?wer=9">GRUPO</a>';}
 
@@ -99,7 +100,7 @@ kaka=linea.split(",");
 lineo=linea;
 
 // FILTRAMOS LOS REGISTROS LISTADOS
-if (readCookie('filtro')==filtramos){
+if (readCookie('filtro')==filtramos && filtramos!=""){
 document.writeln('<tr>');
 document.writeln(lineo.replaceAll(",","<td align='left' style='height: 30px;background-color: #FFFFFF; border:0px solid #E5E5E5'>"));
 document.writeln('</td></tr>');
