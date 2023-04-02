@@ -39,6 +39,8 @@ function simpleReverseGeocoding(lon, lat) {
   .then(main => {
     let temp = main.display_name;
     document.cookie = "localidad=" + temp;
+    var tempot=readCookie('localidad').replaceAll(",","-");
+    document.cookie = "localidad=" + tempot;
 })
   .catch(error => console.error(error));
 }
@@ -101,11 +103,12 @@ function recibir() {
   var notasmn=document.getElementById("notasm").value;
   var notasm=notasmn.replaceAll("\n","·#@");
   var grupom=document.getElementById("grupom").value;
-  var localidadm=readCookie('localidad');
-  var temperaturam=readCookie('temperatura');
-  var presionm=readCookie('presion');
-  var humedadm=readCookie('humedad');
-  var vientom=readCookie('viento');
+  var localidadm=document.getElementById("localidadm").value;
+  var temperaturam=document.getElementById("temperaturam").value;
+  var presionm=document.getElementById("presionm").value;
+  var humedadm=document.getElementById("humedadm").value;
+  var vientom=document.getElementById("vientom").value;
+  
 if (nombrem.length<1){nombrem="         ";}
 if (fecham.length<1){fecham="";}
 if (horam.length<1){horam="";}
@@ -235,7 +238,7 @@ location.href="tabla.html";
 
 }
 
-    
+
   // LEE LAS COOKIES
 function readCookie(name) {
     var nameEQ = name + "="; 
