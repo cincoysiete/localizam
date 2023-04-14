@@ -411,4 +411,14 @@ text-align:  center;
 	color: #ffffff;
 	}
 	
+	#bocadillo {
+		/* display: none; */
+		position: right;
+		background-color: #F5F5AD;
+		border: 1px solid #ccc;
+		padding: 5px;
+		z-index: 1;
+		text-align:  right;
+		font-size: 15px;
+	}
 
