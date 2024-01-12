@@ -40,14 +40,14 @@ function recargar()
 
 
 // SERVICE WORKER
-// if ("serviceWorker" in navigator) {
-//   window.addEventListener("load", function() {
-//     navigator.serviceWorker
-//       .register("/localizam/js/serviceWorker.js")
-//       .then(res => this.console.log("service worker registered"))
-//       .catch(err => console.log("service worker not registered", err));
-//   });
-// }
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker
+      .register("/localizam/js/serviceWorker.js")
+      .then(res => this.console.log("service worker registered"))
+      .catch(err => console.log("service worker not registered", err));
+  });
+}
 
 // document.addEventListener("DOMContentLoaded", function(event) { 
 geoloc4();
@@ -82,24 +82,31 @@ if (readCookie('humedad')<1 || readCookie('humedad')==="null" || !readCookie('hu
 
 
 // SI SE EJECUTA EN UN MOVIL
-if (movilise==1){} else {document.writeln('<div class="contenedor22">'+'<br>');}
+if (movilise==1){} else {document.writeln('<div class="contenedor22">'+'<br>');
+}
 </script>
 
 <body>
+
 <!-- ENCABEZADO -->
 <table width='100%' border='0' >
 <tr><td width="10%">
-  <img src="img/logo.png" height="20px">
+  <img src="img/logo.png" height="10px">
 </td><td align='center'>
 </td><td align='center' width="10%">
-<a href="tabla.html"><img src="img/cuadricula.png" width="40px" title="Ver ubicaciones guardadas"></a>
+<a href="tabla.html"><img src="img/estrella.png" width="30px" title="Ver ubicaciones guardadas"></a>
+</td><td align='center' width="5%">
 </td><td align='center' width="10%">
-<a href="guarda.html" title="Guardar la ubicación actual"><img src="img/ubicacion.png" width="40px"></a>
+  <a href="guarda.html" title="Guardar la ubicación actual"><img src="img/corazon.png" width="30px"></a>
+</td><td align='center' width="5%">
+</td><td align='center' width="10%">
+  <a href="" id="button-share" title="Guardar la ubicación actual"><img src="img/sharethis.png" width="30px"></a>
 
+</td><td align='center' width="5%">
 </td><td align='center' width="10%">
 <script>
   if (localStorage.getItem('nocarga')==1){document.write('<a href="" onclick="reloadPage();"><img src="img/diagrama.gif" width="45px" title=""></a>'); } else {
-    document.write('<a href="https://view.genial.ly/6425a844bcee8b001ac1ea19"><img src="img/boton-web-de-ayuda.png" width="40px" title=""></a>')
+    document.write('<a href="https://view.genial.ly/6425a844bcee8b001ac1ea19"><img src="img/boton-web-de-ayuda.png" width="30px" title=""></a>')
     };
 </script>
 
@@ -108,7 +115,7 @@ if (movilise==1){} else {document.writeln('<div class="contenedor22">'+'<br>');}
   <script>
   // document.write('<div id="bocadillo" onclick="toggleVisibility()">Toca para actualizar los datos de temperatura</div>');
   if (localStorage.getItem('nocarga')==1){
-  document.write('<div id="bocadillo" onclick="toggleVisibility()">Toca para actualizar información sobre el clima</div>');}
+  document.write('<div id="bocadillo" onclick="toggleVisibility()">Toca para actualizar información sobre ubicación y clima</div>');}
   </script>
 <br>
 
@@ -171,7 +178,7 @@ document.write('<br>');
   if (readCookie('humedad')>0){document.writeln(' ');document.writeln('<img src="img/humedad.png" width="20px" title="Humedad relativa del aire ">'+readCookie('humedad')+' %');document.writeln('<br>');}
 
 // VELOCIDAD EL VIENTO
-  if (readCookie('viento')>0){document.writeln(' ');document.writeln('<img src="img/anemometro.png" width="20px" title="Velocidad del viento ">'+readCookie('viento')+' m/s');document.writeln('<br>');}
+  if (readCookie('viento')>0){document.writeln(' ');document.writeln('<img src="img/anemometro.png" width="20px" title="Velocidad del viento ">'+readCookie('viento')+' Km/h');document.writeln('<br>');}
 
 // MOSTRAR DIRECCION
 if (readCookie('localidad')!=null && readCookie('localidad')!=""){
@@ -193,15 +200,21 @@ if(navigator.onLine) {
 
 
 // ELIMINAR TODAS LA UBICACIONES ************************************************************
-document.writeln('<br><br>');
-document.writeln('<center><a href="" style="color:#F35454;" class="button1" onclick="return confirmar();">Eliminar todas la ubicaciones</a></center>');
-document.writeln('<br>');
-document.writeln('<center><a href="" style="color:#F35454;" class="button1" onclick="return quitacookies();">Eliminar todas la cookies</a></center>');
-document.writeln('<br><br>');
+// document.writeln('<br><br>');
+// document.writeln('<center><a href="" style="color:#F35454;" class="button1" onclick="return confirmar();">Eliminar todas la ubicaciones</a></center>');
+// document.writeln('<br>');
+// document.writeln('<center><a href="" style="color:#F35454;" class="button1" onclick="return quitacookies();">Eliminar todas la cookies</a></center>');
+// document.writeln('<br>');
 // ******************************************************************************************
-
-
 </script>
+
+<!-- ACEPTAR COOKIES -->
+<script>
+  localStorage.setItem('cookiesAceptadas', '');
+  if (!localStorage.getItem('cookiesAceptadas')) {document.write('<div id="cookieMessage"><br> Usamos cookies <button id="aceptarCookiesBtn" onclick="aceptarCookies()">Aceptar</button>   <a href="https://view.genial.ly/6467ad5392485b00188d8983"><button id="aceptarCookiesBtn2">+info</button></a></div><br>')};
+  </script>
+  
+  
 
 <div id="demo"></div>
 <span class="colo" id="address" id="temp"></span>
@@ -220,4 +233,38 @@ document.writeln('<br><br>');
       bocadillo.style.display = "none";
     }
   }
+  
   </script>
+
+<script>
+  if(navigator.share) {
+      let buttonShare = document.getElementById("button-share");
+      buttonShare.addEventListener("click", (e) => {
+        e.preventDefault();
+        const URL = this.href;
+        pelanas=readCookie('localidad');
+        lacomparto=pelanas.replace(/ /g,"20%");
+        navigator.share({
+          title: "LocalizaM",
+          text: 'https://maps.google.com/?q='+readCookie("latitud")+','+readCookie("longitud"),
+          url: URL
+        })
+        return false;
+      });
+  } else {
+  }
+
+
+function aceptarCookies() {
+// document.write(localStorage.getItem('cookiesAceptadas'));
+  var mensajeCookies = document.getElementById("cookieMessage");
+  if (localStorage.getItem('cookiesAceptadas')) {
+    mensajeCookies.style.display = "none";
+  } else {
+    localStorage.setItem('cookiesAceptadas', 'true');
+
+  }
+}
+
+</script>
+  

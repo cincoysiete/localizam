@@ -46,9 +46,9 @@ linei=lineo.split("=");
   <tr><td align='left' width="10%">
     <script>
     if (linei[1]>0){
-      document.write('<a href="tabla.html" ><img src="img/salida.png" width="40px"></a>')
+      document.write('<a href="tabla.html" ><img src="img/salida.png" width="30px"></a>')
   } else {
-    document.write('<a href="index.html" ><img src="img/salida.png" width="40px"></a>')
+    document.write('<a href="index.html" ><img src="img/salida.png" width="30px"></a>')
   }
 
 </script>
@@ -56,30 +56,31 @@ linei=lineo.split("=");
 
 </td><td align='center'>
   </td><td align='center' width="10%">
-    <script>if (linei[1]>0){document.writeln('<center><a href="elimina.html?qw='+readCookie('registroactual')+'" style="color:#F35454;" class="button4" onclick="return confirmar();"><img src="img/eliminar.png" width="40px"></a></center>');}</script>
+    <script>if (linei[1]>0){document.writeln('<center><a href="elimina.html?qw='+readCookie('registroactual')+'" style="color:#F35454;" class="button4" onclick="return confirmar();"><img src="img/eliminar.png" width="30px"></a></center>');}</script>
+  </td><td align='center' width="5%">
   </td><td align='center' width="10%">
 
-    <script>if (linei[1]>0){document.write('<button class="button4" onclick="atras()"><img src="img/flecha-izquierda.png" width="40px"></button>')}</script>
-    
-  </td><td align='center' width="10%">
-
-
+    <script>if (linei[1]>0){document.write('<button class="button4" onclick="atras()"><img src="img/flecha-izquierda.png" width="30px"></button>')}</script>
+</td><td align='center' width="10%">
 
     <script>
     if (linei[1]>0){
-      document.write('<button class="button4" onclick="alante()"><img src="img/flecha-derecha.png" width="40px"></button>');
+      document.write('<button class="button4" onclick="alante()"><img src="img/flecha-derecha.png" width="30px"></button>');
     }
-    
+document.write('</td><td align="center" width="5%">');    
       document.write('</td><td align="center" width="10%">');
   document.writeln('<div class="imagen-para-archivo">');
       document.writeln('<label for="boton-archivo">');
-        document.writeln('<img src="img/boton-guardar.png" width="40px" title="Guardar ubicación actual"/>');
+        document.writeln('<img src="img/boton-guardar.png" width="30px" title="Guardar ubicación actual"/>');
         document.writeln('</label>');
         document.writeln('<input id="boton-archivo"  onclick="recibir()" />');
         document.writeln('</div>');          
       </script>
 
-  </td></td></table>
+</td><td align="center" width="5%"></td><td align='center' width="10%">
+    
+  <a href="" id="button-share" title="Guardar la ubicación actual"><img src="img/sharethis.png" width="30px"></a>
+</td></td></table>
   <br>
 
 
@@ -112,7 +113,7 @@ document.writeln('<table width="100%" border="0">');
 
   // NOMBRE
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
-document.writeln('Nombre ');
+document.writeln('<font color="green"><b>Nombre </font>');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
   if (linea[0]!="ubicacion"){
 document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+linea[0]+'">');
@@ -125,7 +126,7 @@ document.writeln('</td></tr>');
 
 // DIRECCION
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
-document.writeln('Direccion ');
+document.writeln('<font color="green"><b>Direccion </font>');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (linei[1]>0){
 document.writeln('<input class="input-field" type="text"  placeholder="" id="localidadm" value="'+linea[10]+'">');
@@ -136,14 +137,14 @@ document.writeln('</td></tr>');
 
 // GRUPO
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
-document.writeln('Grupo ');
+document.writeln('<font color="green"><b>Grupo </font>');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 document.writeln('<input class="input-field" type="text"  placeholder="" id="grupom" value="'+linea[9]+'">');
 document.writeln('</td></tr>');
 
 // FECHA
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
-document.writeln('Fecha ');
+document.writeln('<font color="green"><b>Fecha </font>');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 if (movilise==0){
 qfe=linea[1].split("-");
@@ -165,7 +166,9 @@ qme=qfe[1].substring(qfe[1].length-2);
 qdi=qfe[2].substring(qfe[2].length-2);
 linea[1]=qan+"-"+qme+"-"+qdi;
 }
-document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'" disabled>');
+// document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'" disabled>');
+document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'">');
+
 document.writeln('</td></tr>');
 
 // HORA
@@ -272,7 +275,7 @@ document.writeln('</td></tr>');
 document.writeln('<tr><td align="right" style="background-color: #000000; color:#FFFFFF; border:2px solid #FFFFFF; border-radius:10px; height:10px">');
 
 // las notas se guardan sin intros y se le ponen al mostrar el formulario
-document.writeln('Notas ');
+document.writeln('<font color="green"><b>Notas </font>');
 document.writeln('</td><td style="background-color: #FFFFFF;">');
 var notasmm=linea[8].replaceAll("·#@","\n");
 document.writeln('<textarea class="input-field" rows="15" id="notasm" name="notasm" >'+notasmm+'</textarea>');
@@ -281,7 +284,9 @@ document.writeln('</td></tr>');
 document.writeln('</table>');
 
 // IR A LA UBICACION
+if (linei[1]>0){
 document.writeln('<center><a href="https://www.google.com/maps/dir/'+readCookie("localidad")+'/'+linea[10]+'" target="new"><img src="img/mapa.gif" width="70px"></a></center>');
+}
 </script>
 
 
@@ -300,3 +305,25 @@ document.writeln('<br><br>');
 </script>
 <div id="escribir"></div>
 <span class="colo" id="address"></span>
+
+
+
+<script>
+  if(navigator.share) {
+      let buttonShare = document.getElementById("button-share");
+      buttonShare.addEventListener("click", (e) => {
+        e.preventDefault();
+        const URL = this.href;
+        pelanas=readCookie('localidad');
+        lacomparto=pelanas.replace(/ /g,"20%");
+        navigator.share({
+          title: "LocalizaM",
+          text: 'https://maps.google.com/?q='+linea[4]+','+linea[5],
+          url: URL
+        })
+        return false;
+      });
+  } else {
+  }
+  </script>
+  
