@@ -149,6 +149,7 @@ if (linei[1]){
 } else {
 location.href="index.html";
 }
+
 }
 
 function alante(){
