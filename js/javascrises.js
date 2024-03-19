@@ -140,11 +140,14 @@ localStorage.setItem(contadordatos+"localiza", readCookie('posiactual'));
 
 // Guarda en la cookie contadordatos el contador de registros
 document.cookie="contadordatos="+localStorage.getItem("contadordatos");
+// document.cookie="paguardar=si";
 
 if (linei[1]){
-  location.href="tabla.html";
+  location.href="descarga.html";
+  // location.href="tabla.html";
 } else {
-location.href="index.html";
+location.href="descarga.html";
+// location.href="index.html";
 }
 
 }
@@ -224,6 +227,7 @@ contador=0;
 }
 }
 
+// document.cookie="paguardar=no";
 document.cookie="contadordatos="+contador;
 localStorage.setItem("contadordatos", contador);
 

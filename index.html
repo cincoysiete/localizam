@@ -48,6 +48,7 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.log("service worker not registered", err));
   });
 }
+// document.write(readCookie('paguardar'));  
 
 geoloc4();
 leeclima();
@@ -87,12 +88,17 @@ if (movilise==1){} else {document.writeln('<div class="contenedor22">'+'<br>');
 <tr><td width="10%">
   <img src="img/logo.png" height="10px">
 </td><td align='center'>
+  <!-- <script>
+        document.write(readCookie('paguardar'));
+  if (readCookie('paguardar')=="si") {document.write("<font color='red'>Hay ubicaciones por descargar");}
+  </script> -->
 </td><td align='center' width="10%">
 <a href="tabla.html"><img src="img/estrella.png" width="30px" title="Ver ubicaciones guardadas"></a>
 </td><td align='center' width="5%">
 </td><td align='center' width="10%">
   <a href="guarda.html" title="Guardar la ubicación actual"><img src="img/corazon.png" width="30px"></a>
 </td><td align='center' width="5%">
+
 </td><td align='center' width="10%">
   <a href="" id="button-share" title="Guardar la ubicación actual"><img src="img/sharethis.png" width="30px"></a>
 
