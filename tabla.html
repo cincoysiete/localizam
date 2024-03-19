@@ -3,7 +3,6 @@
 <link rel="stylesheet" type="text/css" href="cincoysiete.css" />
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="img/milogo.png" />
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 <!-- ELIMINAR LA CACHE -->
@@ -32,7 +31,6 @@
 <script>
 if (readCookie('filtro')===null){document.cookie="filtro="+"";}
 if (!readCookie('filtro')){} else {document.write('<a href="nofiltra.html"><img src="img/filtrar.png" width="30px"></a>');}
-// document.write("**"+readCookie('filtro')+"**");
 
 </script>
 </td><td align='center' width="10%">
@@ -120,37 +118,4 @@ document.writeln('</table>');
 document.writeln('<br><br>');
 
 
-// // SUBE ARCHIVO CON GRUPO DE REGISTROS
-// function readFile(input) {
-//   let file = input.files[0];
-//   let reader = new FileReader();
-//   reader.readAsText(file);
-//   reader.onload = function() {
-//   texto	=reader.result;
-//   var kaka=texto.split("\n");
-//   var conta=1;
-//   kaka.forEach(function() {conta++;}
-// );
-
-// conta--;
-// localStorage.clear();
-// contador=0;
-//   for (i=1;i<=conta;i++) {
-//     if (kaka[i]){
-//     localStorage.setItem(i+"localiza", kaka[i]);
-//     contador++;
-// }
-// }
-
-// document.cookie="contadordatos="+contador;
-// localStorage.setItem("contadordatos", contador);
-
-// location.href="tabla.html";
-// };
-
-//   reader.onerror = function() {
-//     console.log(reader.error);
-//   };
-
-// }
 </script>

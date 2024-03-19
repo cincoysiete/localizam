@@ -33,9 +33,6 @@ elaza=localStorage.getItem(linei[1]+'localiza').split(',');
 		return false;
 }
 
-// document.addEventListener("DOMContentLoaded", function(event) { 
-// palabrilla();
-// });
 
 lineo=window.location.href;
 linei=lineo.split("=");
@@ -93,20 +90,11 @@ lineo=window.location.href;
 linei=lineo.split("=");
 document.cookie="ficha="+linei[1];
 if (linei[1]>0){
-// Separa por comas la ubicacion a editar
 linea=localStorage.getItem(linei[1]+"localiza").split(",");
 document.cookie="registroactual="+linei[1];
 } else {
-// Separa por comas la ubicacion actual
 linea=readCookie('posiactual').split(",");
 }
-
-// document.cookie="nombrem="+linea[0];
-// document.cookie="localidadm="+linea[10];
-// document.cookie="grupom="+linea[9];
-// document.writeln(readCookie('nombrem')+'<br>');
-// document.writeln(readCookie('localidadm')+'<br>');
-// document.writeln(readCookie('grupom')+'<br>');
 
 // Muestra el formulario con el registro actual y te ofrece la posibilidad de modificarlo
 document.writeln('<table width="100%" border="0">');
@@ -118,7 +106,6 @@ document.writeln('</td><td style="background-color: #FFFFFF;">');
   if (linea[0]!="ubicacion"){
 document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+linea[0]+'">');
   } else {
-    // palabrilla();
     document.writeln('<input class="input-field" type="text"  placeholder="" id="nombrem" value="'+readCookie('palabra')+'">');
   }
 document.writeln('</td></tr>');
@@ -166,7 +153,6 @@ qme=qfe[1].substring(qfe[1].length-2);
 qdi=qfe[2].substring(qfe[2].length-2);
 linea[1]=qan+"-"+qme+"-"+qdi;
 }
-// document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'" disabled>');
 document.writeln('<input class="input-field" type="date"  placeholder="" id="fecham" value="'+linea[1]+'">');
 
 document.writeln('</td></tr>');

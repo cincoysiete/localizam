@@ -49,12 +49,10 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-// document.addEventListener("DOMContentLoaded", function(event) { 
 geoloc4();
 leeclima();
 simpleReverseGeocoding(readCookie('longitud'), readCookie('latitud'));
 palabrilla();
-// });
 
 function reloadPage() {
   const maxReloads = 5; // número máximo de recargas
@@ -75,10 +73,6 @@ if (readCookie('humedad')<1 || readCookie('humedad')==="null" || !readCookie('hu
     localStorage.setItem('nocarga', 0);
 
 }
-
-// if (readCookie('humedad')<1 || readCookie('humedad')==="null" || !readCookie('humedad')){
-//   recargar();
-// }
 
 
 // SI SE EJECUTA EN UN MOVIL
@@ -199,13 +193,6 @@ if(navigator.onLine) {
   }
 
 
-// ELIMINAR TODAS LA UBICACIONES ************************************************************
-// document.writeln('<br><br>');
-// document.writeln('<center><a href="" style="color:#F35454;" class="button1" onclick="return confirmar();">Eliminar todas la ubicaciones</a></center>');
-// document.writeln('<br>');
-// document.writeln('<center><a href="" style="color:#F35454;" class="button1" onclick="return quitacookies();">Eliminar todas la cookies</a></center>');
-// document.writeln('<br>');
-// ******************************************************************************************
 </script>
 
 <!-- ACEPTAR COOKIES -->
@@ -218,7 +205,6 @@ if(navigator.onLine) {
 
 <div id="demo"></div>
 <span class="colo" id="address" id="temp"></span>
-<!-- <span class="colo"></span> -->
 
 
 </body>
@@ -256,7 +242,6 @@ if(navigator.onLine) {
 
 
 function aceptarCookies() {
-// document.write(localStorage.getItem('cookiesAceptadas'));
   var mensajeCookies = document.getElementById("cookieMessage");
   if (localStorage.getItem('cookiesAceptadas')) {
     mensajeCookies.style.display = "none";
