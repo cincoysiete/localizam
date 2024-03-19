@@ -1,7 +1,4 @@
 
-
-// document.writeln('<link rel="stylesheet" type="text/css" href="../cincoysiete.css" />');
-
   // CAPTA LA UBICACION
   function showPosition(position){
     fecha = new Date();
