@@ -1,16 +1,1 @@
-{
-    "host": "ftp.cincoysiete.net",
-    "username": "u629431698",
-    "password": "Embolicani18@",
-    "remotePath": "/domains/cincoysiete.net/public_html/github",
-    "protocol": "ftp",
-    "port": 21,
-    "fileNameEncoding": "utf8",
-    "autoUpload": true,
-    "autoDelete": false,
-    "autoDownload": false,
-    "ignore": [
-        ".git",
-        "/.vscode"
-    ]
-}
+
